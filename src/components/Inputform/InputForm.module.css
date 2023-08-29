@@ -1,0 +1,42 @@
+.form{
+    max-width: 50rem;
+    width: 70%;
+    margin: 10rem auto;
+    animation: meals-appear 1s ease-out forwards;
+    background-color: azure;
+    border-radius: 8px;
+    padding: 2rem 3rem;
+}
+.form label{
+    text-align: left;
+}
+.form input{
+    border-radius: 6px;
+    height: 2rem;
+    
+}
+.input{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    
+}
+.form button {
+    font: inherit;
+    cursor: pointer;
+    background-color: #8a2b06;
+    border: 1px solid #8a2b06;
+    color: white;
+    padding: 0.25rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-top: 1rem;
+  }
+  
+  
+  .form button:hover,
+  .form button:active {
+    background-color: #641e03;
+    border-color: #641e03;
+  }
