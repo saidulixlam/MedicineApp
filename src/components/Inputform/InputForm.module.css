@@ -1,7 +1,7 @@
 .form{
-    max-width: 50rem;
-    width: 70%;
-    margin: 10rem auto;
+    max-width: 80rem;
+    width: 85%;
+    margin: 8rem auto;
     animation: meals-appear 1s ease-out forwards;
     background-color: azure;
     border-radius: 8px;
@@ -32,6 +32,12 @@
     border-radius: 20px;
     font-weight: bold;
     margin-top: 1rem;
+  }
+  .radio{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap:0.5rem;
   }
   
   

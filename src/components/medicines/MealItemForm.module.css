@@ -1,6 +1,10 @@
 .form {
-  margin-top: 0.5rem;
+   margin-top: 0.5rem;
     text-align: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10rem;
   }
   
   .form button {
@@ -13,7 +17,16 @@
     border-radius: 20px;
     font-weight: bold;
   }
-  
+  .options{
+    font: inherit;
+    cursor: pointer;
+    background-color: #8a2b06;
+    border: 1px solid #8a2b06;
+    color: white;
+    padding: 0.25rem 2rem;
+    border-radius: 20px;
+    font-weight: bold;
+  }
   
   .form button:hover,
   .form button:active {

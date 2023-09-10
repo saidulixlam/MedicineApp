@@ -16,7 +16,7 @@ function App() {
  function closeCartHandler() {
     setShowcart(false);
  }
- console.log('i am running');
+ 
   return (
     <CartProvider>
       <MedicineProvider>

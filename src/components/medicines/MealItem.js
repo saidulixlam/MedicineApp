@@ -1,5 +1,8 @@
+// import { useState } from 'react';
+import { useRef } from 'react';
 import classes from './MealItem.module.css';
 import MealItemForm from './MealItemForm';
+
 const MealItem = (props) => {
     return (
         <li className={classes.meal}>
@@ -11,11 +14,11 @@ const MealItem = (props) => {
                 <div className={classes.price}>
                     {props.price}.00 Rs.
                 </div>
+                
             </div>
             <div>
-               <MealItemForm item={props}/>
+                <MealItemForm item={props} />
             </div>
-
         </li>
     );
 }

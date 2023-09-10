@@ -1,49 +1,80 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CartContext from "./cart-context";
 
 const CartProvider = (props) => {
-    const [items, updatedItems] = useState([]);
+    const [items, setItems] = useState([]);
+    console.log(items);
+
+    // Load cart items from localStorage when the component initializes
+    useEffect(() => {
+        const savedItems = localStorage.getItem("cartItems");
+        if (savedItems) {
+            setItems(JSON.parse(savedItems));
+        }
+    }, []);
+
+    const saveItemsToLocalStorage = (items) => {
+        localStorage.setItem("cartItems", JSON.stringify(items));
+    };
 
     const addItemHandler = (item) => {
-    //creating copy's of previous array
-       const newItems=[...items];
-       //checking if item is already there in new array and getting the index
-       const idx=newItems.findIndex((element)=> element.id === item.id);
-       // if already there
-       if(idx !== -1){
-            newItems[idx].quantity+=Number(item.quantity);
-       }else{
-        newItems.push(item);
-       }
-       updatedItems(newItems);
-    }
+        const newItems = [...items];
+        
+        // Check if the item with the same ID and size already exists in the cart
+        const existingItem = newItems.find(
+            (element) => element.id === item.id && element.size === item.size
+        );
+    
+        if (existingItem) {
+            // If the same item with the same size exists, increment its quantity
+            existingItem.quantity += Number(item.quantity);
+        } else {
+            // If the item with the same size doesn't exist, add it to the cart
+            newItems.push(item);
+        }
+    
+        setItems(newItems);
+        saveItemsToLocalStorage(newItems);
+    };
 
     const removeItemHandler = (id) => {
-       //creating copy's of previous array
-       const newItems=[...items];
-       //checking if item is already there in new array and getting the index
-       const idx=newItems.findIndex((element)=> element.id === id);
-       // if already there
-       if(idx !== -1){
-        const newItem={...newItems[idx]};//duplicate thaaka item to lolu
-        newItem.quantity--;//quantity eta komai dilu
-        newItems[idx]=newItem;
-        updatedItems(newItems);
-       }
+        const newItems = [...items];
+        const existingItemIndex = newItems.findIndex(
+            (element) => element.id === id
+        );
+
+        if (existingItemIndex !== -1) {
+            const existingItem = newItems[existingItemIndex];
+
+            if (existingItem.quantity === 1) {
+                newItems.splice(existingItemIndex, 1);
+            } else {
+                existingItem.quantity--;
+            }
+
+            setItems(newItems);
+            saveItemsToLocalStorage(newItems);
+        }
     };
-console.log('i am running');
+    const removeAll = ()=>{
+        setItems([]); // Clear all items
+        localStorage.removeItem("cartItems"); 
+    } 
+
     const cartContext = {
         items: items,
-        totalAmount: 0,
-        alreadyHas: false,
+        totalAmount: 0, // You can calculate this if needed
+        alreadyHas: false, // You can set this flag based on your logic
         addItem: addItemHandler,
-        removeItem: removeItemHandler
-    }
+        removeItem: removeItemHandler,
+        removeAll:removeAll
+    };
+
     return (
         <CartContext.Provider value={cartContext}>
             {props.children}
         </CartContext.Provider>
     );
-}
+};
 
 export default CartProvider;

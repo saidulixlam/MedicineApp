@@ -2,9 +2,6 @@ import { useContext } from 'react';
 import classes from './AvailableMeals.module.css';
 import MealItem from './MealItem';
 import MedicineContext from '../../store/medicine-context';
-// const dummyMeals = [
-    
-// ]
 const AvailableMeals = () => {
     const ctx=useContext(MedicineContext);
     const mealsList = ctx.items.map((meal) =>
@@ -14,6 +11,7 @@ const AvailableMeals = () => {
             name={meal.name}
             description={meal.description}
             price={meal.price}
+            sizes={meal.sizes}
         />
     )
     return (
